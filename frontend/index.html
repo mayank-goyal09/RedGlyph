@@ -234,6 +234,19 @@
                     <span class="issues-count" id="issuesCount">0</span>
                 </div>
                 <div class="issues-list" id="issuesList"></div>
+
+                <!-- Get Score Report button — shown once at least one review exists -->
+                <div class="report-footer hidden" id="reportFooter">
+                    <button class="report-btn" id="getReportBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        Get Score Report
+                        <span class="report-count" id="reportCount">1 review</span>
+                    </button>
+                </div>
             </div>
         </section>
     </main>
@@ -295,6 +308,39 @@
                         <p>No reviews yet. Submit your first code review!</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ EMAIL REPORT MODAL ═══════════════════ -->
+    <div class="modal-overlay hidden" id="reportModal">
+        <div class="modal" role="dialog" aria-labelledby="reportTitle">
+            <div class="modal-header">
+                <h2 id="reportTitle">📊 Get Your Score Report</h2>
+                <button class="modal-close" id="closeReport">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="report-summary" id="reportSummary">
+                    <!-- Filled dynamically -->
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label" for="reportEmail">Send report to</label>
+                    <p class="setting-desc">Enter your email — we'll send a full breakdown of every review plus your
+                        average score.</p>
+                    <input type="email" class="setting-input" id="reportEmail" placeholder="you@example.com"
+                        autocomplete="email">
+                    <p class="setting-note">📬 The email includes each individual review with all issues, suggestions,
+                        and your overall session average.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" id="cancelReport">Cancel</button>
+                <button class="modal-btn primary" id="sendReportBtn">
+                    <span class="btn-send-content">Send Report</span>
+                    <span class="btn-send-loader hidden">
+                        <span class="spinner"></span> Sending...
+                    </span>
+                </button>
             </div>
         </div>
     </div>

@@ -304,6 +304,114 @@ copyReportBtn.addEventListener('click', () => {
 });
 
 /* ═══════════════════════════════════════════════════════
+   GET SCORE REPORT (Session Summary Email)
+   ═══════════════════════════════════════════════════════ */
+
+// In-memory session reviews (all reviews done this session)
+let sessionReviews = [];
+
+const reportFooter = $('#reportFooter');
+const reportCount = $('#reportCount');
+const getReportBtn = $('#getReportBtn');
+const reportModal = $('#reportModal');
+const closeReport = $('#closeReport');
+const cancelReport = $('#cancelReport');
+const sendReportBtn = $('#sendReportBtn');
+const reportEmail = $('#reportEmail');
+const reportSummary = $('#reportSummary');
+
+// Whenever a new review comes in, push to session array and show the button
+store.subscribe('report', (report) => {
+    if (!report) return;
+
+    // Push current review into session list
+    sessionReviews.push({
+        quality_score: report.quality_score,
+        issues: report.issues.map(i => ({
+            severity: i.severity,
+            description: i.description,
+            suggestion: i.suggestion,
+        })),
+    });
+
+    // Show the footer button
+    reportFooter.classList.remove('hidden');
+    const n = sessionReviews.length;
+    reportCount.textContent = `${n} review${n > 1 ? 's' : ''}`;
+});
+
+// Open report modal
+getReportBtn.addEventListener('click', () => {
+    const n = sessionReviews.length;
+    const avg = (sessionReviews.reduce((s, r) => s + r.quality_score, 0) / n).toFixed(1);
+    const avgNum = parseFloat(avg);
+    const color = avgNum >= 8 ? '#22c55e' : avgNum >= 6 ? '#f97316' : avgNum >= 4 ? '#f59e0b' : '#ef4444';
+
+    // Populate summary card
+    reportSummary.innerHTML = `
+        <div class="report-summary-info">
+            <span class="rs-label">Session Reviews</span>
+            <span class="rs-value">${n} review${n > 1 ? 's' : ''} this session</span>
+        </div>
+        <div class="report-avg-score" style="color:${color}">${avg}<span style="font-size:1rem;color:#555;">/10</span></div>
+    `;
+
+    reportEmail.value = '';
+    reportModal.classList.remove('hidden');
+    setTimeout(() => reportEmail.focus(), 150);
+});
+
+// Close modal
+const closeReportModal = () => reportModal.classList.add('hidden');
+closeReport.addEventListener('click', closeReportModal);
+cancelReport.addEventListener('click', closeReportModal);
+reportModal.addEventListener('click', (e) => {
+    if (e.target === reportModal) closeReportModal();
+});
+
+// Send report
+sendReportBtn.addEventListener('click', async () => {
+    const email = reportEmail.value.trim();
+    if (!email || !email.includes('@')) {
+        showToast('Please enter a valid email address.', 'error', 3000);
+        reportEmail.focus();
+        return;
+    }
+
+    // Show loading state
+    const btnContent = sendReportBtn.querySelector('.btn-send-content');
+    const btnLoader = sendReportBtn.querySelector('.btn-send-loader');
+    btnContent.classList.add('hidden');
+    btnLoader.classList.remove('hidden');
+    sendReportBtn.disabled = true;
+
+    try {
+        const serverBase = store.state.serverUrl || 'http://localhost:8000';
+        const res = await fetch(`${serverBase}/send-report`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, reviews: sessionReviews }),
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || 'Failed to send report');
+        }
+
+        const data = await res.json();
+        closeReportModal();
+        showToast(`📧 Report sent to ${data.recipient} — Avg score: ${data.average_score}/10`, 'success', 6000);
+
+    } catch (err) {
+        showToast(`Failed to send: ${err.message}`, 'error', 6000);
+    } finally {
+        btnContent.classList.remove('hidden');
+        btnLoader.classList.add('hidden');
+        sendReportBtn.disabled = false;
+    }
+});
+
+/* ═══════════════════════════════════════════════════════
    INITIALIZATION
    ═══════════════════════════════════════════════════════ */
 
@@ -325,3 +433,4 @@ checkHealth().then((alive) => {
 });
 
 console.log('%c⚡ RedGlyph AI Code Reviewer loaded', 'color: #22c55e; font-weight: bold; font-size: 14px;');
+

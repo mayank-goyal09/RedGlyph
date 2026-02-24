@@ -22,6 +22,7 @@ from pydantic import BaseModel
 from agents.reviewer_graph import get_default_graph, create_graph
 from core.config import config
 from core.audit import log_review
+from core.email_report import send_session_report, ReportRequest
 import uvicorn
 
 
@@ -106,6 +107,34 @@ async def review_code(request: CodeRequest, raw_request: Request):
 @app.get("/")
 def health_check():
     return {"status": "RedGlyph Reviewer API is Online 🟢", "version": "2.0.0"}
+
+
+# ─── Session Report ───
+@app.post("/send-report")
+async def send_report(report_request: ReportRequest, raw_request: Request):
+    client_ip = raw_request.client.host if raw_request.client else "unknown"
+
+    if not report_request.reviews:
+        raise HTTPException(status_code=400, detail="No reviews to report.")
+    if not report_request.email or "@" not in report_request.email:
+        raise HTTPException(status_code=400, detail="Please provide a valid email address.")
+
+    try:
+        send_session_report(report_request)
+        avg = round(sum(r.quality_score for r in report_request.reviews) / len(report_request.reviews), 1)
+        print(f"📧 Session report sent to {report_request.email} | {len(report_request.reviews)} reviews | avg: {avg}")
+        return {
+            "status": "sent",
+            "recipient": report_request.email,
+            "total_reviews": len(report_request.reviews),
+            "average_score": avg,
+        }
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except Exception as e:
+        print(f"❌ Email error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to send email: {str(e)}")
+
 
 
 # ─── Webhook (GitHub integration) ───
