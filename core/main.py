@@ -19,7 +19,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from agents.reviewer_graph import graph, create_graph
+from agents.reviewer_graph import get_default_graph, create_graph
 from core.config import config
 from core.audit import log_review
 import uvicorn
@@ -63,7 +63,7 @@ async def review_code(request: CodeRequest, raw_request: Request):
             custom_graph = create_graph(api_key=custom_key)
             result = custom_graph.invoke({"code_snippet": request.code})
         else:
-            result = graph.invoke({"code_snippet": request.code})
+            result = get_default_graph().invoke({"code_snippet": request.code})
 
         report = result["report"]
         duration_ms = (time.time() - start_time) * 1000

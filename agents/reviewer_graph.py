@@ -84,9 +84,16 @@ def create_graph(api_key: str = None):
     workflow.set_entry_point("reviewer")
     workflow.add_edge("reviewer", "notifier")
     workflow.add_edge("notifier", END)
-
     return workflow.compile()
 
 
-# Default graph with server API key (for users who don't bring their own)
-graph = create_graph()
+# Lazy default graph — only created on first request, not at import time.
+# This allows the server to start even without a valid API key (e.g. in CI).
+_default_graph = None
+
+def get_default_graph():
+    """Get or create the default graph (lazy singleton)."""
+    global _default_graph
+    if _default_graph is None:
+        _default_graph = create_graph()
+    return _default_graph
