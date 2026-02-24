@@ -20,7 +20,7 @@ class Config:
 
     # AI
     GOOGLE_API_KEY: str = os.getenv("GOOGLE_API_KEY", "")
-    DEFAULT_MODEL: str = os.getenv("MODEL_NAME", "gemini-1.5-flash")
+    DEFAULT_MODEL: str = os.getenv("MODEL_NAME", "gemini-2.5-flash")
     TEMPERATURE: float = float(os.getenv("TEMPERATURE", "0.1"))
 
     # Email

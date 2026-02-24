@@ -361,6 +361,7 @@ body {
     cursor: pointer;
     outline: none;
     transition: all var(--duration-fast) var(--ease-out);
+    appearance: auto;
     -webkit-appearance: auto;
 }
 

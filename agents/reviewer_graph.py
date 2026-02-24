@@ -9,6 +9,8 @@ from email.mime.multipart import MIMEMultipart
 load_dotenv()
 
 
+from core.config import config
+
 def get_llm(api_key: str = None):
     """
     Create an LLM instance. 
@@ -17,8 +19,8 @@ def get_llm(api_key: str = None):
     """
     key = api_key or os.getenv("GOOGLE_API_KEY")
     return ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",
-        temperature=0.1,
+        model=config.DEFAULT_MODEL,
+        temperature=config.TEMPERATURE,
         google_api_key=key,
     )
 
