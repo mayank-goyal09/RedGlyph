@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════════════
+   REDGLYPH AI CODE REVIEWER — Animations & Transitions
+   60fps GPU-composed, reduced reflow/repaint
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Ambient Orb Floating ─── */
+@keyframes orbFloat1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(60px, -40px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-30px, 30px) scale(0.95);
+    }
+}
+
+@keyframes orbFloat2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(-50px, 30px) scale(1.05);
+    }
+
+    66% {
+        transform: translate(40px, -50px) scale(0.9);
+    }
+}
+
+@keyframes orbFloat3 {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.15;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.25;
+    }
+}
+
+/* ─── Skeleton Shimmer ─── */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(200%);
+    }
+}
+
+/* ─── Spinner ─── */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ─── Status Dot Pulse ─── */
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+/* ─── Toast In/Out ─── */
+@keyframes toastIn {
+    0% {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes toastOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+}
+
+/* ─── Page Load — Staggered Entrance ─── */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navbar {
+    animation: fadeInUp 0.5s var(--ease-out) 0.1s both;
+}
+
+.editor-panel {
+    animation: fadeInUp 0.6s var(--ease-out) 0.2s both;
+}
+
+.results-panel {
+    animation: fadeInUp 0.6s var(--ease-out) 0.35s both;
+}
+
+/* ─── Score Ring Animation ─── */
+@keyframes scoreReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ─── Issue Card Cascade ─── */
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ─── Score Counter Animation ─── */
+@keyframes countUp {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    60% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ─── Button Ripple ─── */
+.review-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.review-btn:active::after {
+    opacity: 1;
+}
+
+/* ─── GPU Optimization Hints ─── */
+.orb,
+.review-btn,
+.issue-card,
+.modal,
+.toast,
+.spinner,
+.score-fill {
+    will-change: transform, opacity;
+}
+
+/* ─── Reduced Motion Preference ─── */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .orb {
+        animation: none !important;
+    }
+}

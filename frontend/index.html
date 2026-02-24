@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AI-Powered Code Reviewer — Get instant, professional code reviews powered by Google Gemini. Analyze bugs, performance issues, and get actionable suggestions.">
+    <title>RedGlyph — AI Code Reviewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════════ AMBIENT BACKGROUND ═══════════════════ -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <div class="logo-wrapper">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+                    <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#logoGrad)" stroke-width="2.5" />
+                    <path d="M10 16L14 20L22 12" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="#166534" />
+                            <stop offset="1" stop-color="#22c55e" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">RedGlyph<span class="logo-dot">.</span></span>
+            </div>
+            <div class="nav-badge">AI Code Reviewer</div>
+        </div>
+        <div class="nav-right">
+            <div class="api-status" id="apiStatus">
+                <span class="status-dot"></span>
+                <span class="status-text">Default API</span>
+            </div>
+            <button class="nav-btn" id="historyBtn" title="Review History">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+            </button>
+            <button class="nav-btn" id="settingsBtn" title="Settings">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════ MAIN CONTENT ═══════════════════ -->
+    <main class="main-container" id="mainContainer">
+
+        <!-- LEFT PANEL — CODE EDITOR -->
+        <section class="panel editor-panel" id="editorPanel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    <span>Code Input</span>
+                </div>
+                <div class="panel-actions">
+                    <select class="lang-select" id="langSelect">
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                        <option value="go">Go</option>
+                        <option value="rust">Rust</option>
+                        <option value="typescript">TypeScript</option>
+                    </select>
+                    <button class="panel-btn" id="clearBtn" title="Clear">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18" />
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                        </svg>
+                    </button>
+                    <button class="panel-btn" id="pasteBtn" title="Paste from Clipboard">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="editor-wrapper" id="editorWrapper">
+                <div class="line-numbers" id="lineNumbers">1</div>
+                <textarea class="code-editor" id="codeEditor" spellcheck="false"
+                    placeholder="// Paste or type your code here...&#10;// Supports Python, JavaScript, Java, C++, Go, Rust, TypeScript&#10;&#10;def example():&#10;    pass"></textarea>
+            </div>
+            <div class="editor-footer">
+                <div class="editor-info">
+                    <span id="lineCount">Lines: 0</span>
+                    <span id="charCount">Chars: 0</span>
+                </div>
+                <button class="review-btn" id="reviewBtn">
+                    <span class="btn-content">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                        <span>Review Code</span>
+                    </span>
+                    <span class="btn-loader">
+                        <span class="spinner"></span>
+                        <span>Analyzing...</span>
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL — REVIEW RESULTS -->
+        <section class="panel results-panel" id="resultsPanel">
+
+            <!-- Empty State -->
+            <div class="results-empty" id="resultsEmpty">
+                <div class="empty-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="url(#emptyGrad)"
+                        stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                        <defs>
+                            <linearGradient id="emptyGrad" x1="0" y1="0" x2="24" y2="24">
+                                <stop stop-color="#22c55e" stop-opacity="0.5" />
+                                <stop offset="1" stop-color="#f97316" stop-opacity="0.5" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h3>Ready to Review</h3>
+                <p>Paste your code and click <strong>"Review Code"</strong> to get an AI-powered analysis with bug
+                    detection, performance tips, and best practices.</p>
+            </div>
+
+            <!-- Skeleton Loader -->
+            <div class="results-skeleton hidden" id="resultsSkeleton">
+                <div class="skeleton-header">
+                    <div class="skeleton-score">
+                        <div class="skel-circle"></div>
+                        <div class="skel-lines">
+                            <div class="skel-line skel-w60"></div>
+                            <div class="skel-line skel-w40"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skeleton-cards">
+                    <div class="skel-card">
+                        <div class="skel-line skel-w30"></div>
+                        <div class="skel-line skel-w90"></div>
+                        <div class="skel-line skel-w70"></div>
+                    </div>
+                    <div class="skel-card">
+                        <div class="skel-line skel-w25"></div>
+                        <div class="skel-line skel-w80"></div>
+                        <div class="skel-line skel-w60"></div>
+                    </div>
+                    <div class="skel-card">
+                        <div class="skel-line skel-w35"></div>
+                        <div class="skel-line skel-w85"></div>
+                        <div class="skel-line skel-w50"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual Results -->
+            <div class="results-content hidden" id="resultsContent">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                        <span>Review Report</span>
+                    </div>
+                    <button class="panel-btn" id="copyReportBtn" title="Copy Report">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Score Section -->
+                <div class="score-section" id="scoreSection">
+                    <div class="score-ring">
+                        <svg viewBox="0 0 120 120" class="score-svg">
+                            <circle class="score-track" cx="60" cy="60" r="50" />
+                            <circle class="score-fill" id="scoreFill" cx="60" cy="60" r="50" />
+                        </svg>
+                        <div class="score-value" id="scoreValue">0.0</div>
+                    </div>
+                    <div class="score-meta">
+                        <span class="score-label" id="scoreLabel">Quality Score</span>
+                        <div class="score-bar-wrapper">
+                            <div class="score-bar" id="scoreBar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Issues Section -->
+                <div class="issues-header">
+                    <span>Identified Issues</span>
+                    <span class="issues-count" id="issuesCount">0</span>
+                </div>
+                <div class="issues-list" id="issuesList"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══════════════════ SETTINGS MODAL ═══════════════════ -->
+    <div class="modal-overlay hidden" id="settingsModal">
+        <div class="modal" role="dialog" aria-labelledby="settingsTitle">
+            <div class="modal-header">
+                <h2 id="settingsTitle">Settings</h2>
+                <button class="modal-close" id="closeSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label class="setting-label">API Configuration</label>
+                    <p class="setting-desc">Use the default server API or bring your own Google Gemini API key.</p>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" id="toggleDefault" data-mode="default">Default API</button>
+                        <button class="toggle-btn" id="toggleCustom" data-mode="custom">Custom API Key</button>
+                    </div>
+                </div>
+                <div class="setting-group hidden" id="customApiGroup">
+                    <label class="setting-label" for="customApiKey">Your Google Gemini API Key</label>
+                    <div class="input-wrapper">
+                        <input type="password" class="setting-input" id="customApiKey" placeholder="AIzaSy...">
+                        <button class="input-toggle" id="toggleApiVisibility" title="Show/Hide">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="setting-note">🔒 Your key is stored locally and sent securely via headers. It never
+                        touches our server storage.</p>
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">Server Endpoint</label>
+                    <input type="text" class="setting-input" id="serverUrl" value="http://localhost:8000"
+                        placeholder="http://localhost:8000">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" id="cancelSettings">Cancel</button>
+                <button class="modal-btn primary" id="saveSettings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ HISTORY PANEL ═══════════════════ -->
+    <div class="modal-overlay hidden" id="historyModal">
+        <div class="modal modal-wide" role="dialog" aria-labelledby="historyTitle">
+            <div class="modal-header">
+                <h2 id="historyTitle">Review History</h2>
+                <button class="modal-close" id="closeHistory">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">
+                        <p>No reviews yet. Submit your first code review!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ TOAST NOTIFICATIONS ═══════════════════ -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ═══════════════════ SCRIPTS (ES Modules) ═══════════════════ -->
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
