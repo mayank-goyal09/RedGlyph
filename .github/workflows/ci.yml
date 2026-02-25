@@ -88,3 +88,25 @@ jobs:
           git remote add huggingface https://mayankg09:${HF_TOKEN}@huggingface.co/spaces/mayankg09/RedGlyph
           git push huggingface main --force
           echo "✅ Deployed to HuggingFace Spaces"
+
+  deploy-to-github-pages:
+    name: Deploy Frontend to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy frontend/ to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend
+          publish_branch: gh-pages
+          commit_message: "deploy: update GitHub Pages from ${{ github.sha }}"
+

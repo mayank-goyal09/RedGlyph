@@ -8,7 +8,7 @@ const initialState = {
     // API Config
     apiMode: 'default',       // 'default' | 'custom'
     customApiKey: '',
-    serverUrl: 'http://localhost:8000',
+    serverUrl: 'https://mayankg09-redglyph.hf.space',
 
     // Editor
     code: '',
