@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="About RedGlyph — AI-Powered Code Reviewer. Learn how it works, features, and the technology behind it.">
+    <title>About — RedGlyph AI Code Reviewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/about.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════════ AMBIENT BACKGROUND ═══════════════════ -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo-wrapper" style="text-decoration:none;">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+                    <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#logoGrad)" stroke-width="2.5" />
+                    <path d="M10 16L14 20L22 12" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="#166534" />
+                            <stop offset="1" stop-color="#22c55e" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">RedGlyph<span class="logo-dot">.</span></span>
+            </a>
+            <div class="nav-badge">About</div>
+        </div>
+        <div class="nav-right">
+            <a href="index.html" class="nav-btn" title="Back to Reviewer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════ ABOUT CONTENT ═══════════════════ -->
+    <div class="about-page">
+
+        <!-- Hero -->
+        <section class="about-hero scroll-reveal">
+            <h1 class="about-title">
+                Your AI-Powered<br>
+                <span class="gradient-text">Senior Engineer</span>
+            </h1>
+            <p class="about-subtitle">
+                RedGlyph reviews your code like a senior engineer sitting right next to you —
+                catching bugs, spotting anti-patterns, and giving you actionable fixes in seconds.
+            </p>
+            <a href="index.html" class="hero-cta">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Try It Now
+            </a>
+        </section>
+
+        <!-- Divider -->
+        <div class="about-divider scroll-reveal">
+            <div class="divider-line"></div>
+            <span class="divider-label">FEATURES</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <!-- Feature Cards -->
+        <section class="about-features">
+            <div class="feature-card scroll-reveal" style="--delay: 0s">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Analysis</h3>
+                <p>Powered by Google Gemini 2.5 Flash. Your code is analyzed as a complete unit —
+                    catching logical bugs, security flaws, and architectural issues a linter would miss.</p>
+            </div>
+            <div class="feature-card scroll-reveal" style="--delay: 0.1s">
+                <div class="feature-icon">📊</div>
+                <h3>Quality Score</h3>
+                <p>Every review generates a score out of 10 with an animated visual ring. Color-coded
+                    green for excellent, orange for good, red for critical.</p>
+            </div>
+            <div class="feature-card scroll-reveal" style="--delay: 0.2s">
+                <div class="feature-icon">🔴</div>
+                <h3>Severity-Based Issues</h3>
+                <p>Issues categorized by severity: High for bugs & crashes, Medium for performance,
+                    Low for style. Every issue has a concrete fix suggestion.</p>
+            </div>
+            <div class="feature-card scroll-reveal" style="--delay: 0.3s">
+                <div class="feature-icon">📧</div>
+                <h3>Session Report via Email</h3>
+                <p>After multiple reviews, click "Get Score Report" — enter any email and receive a
+                    stunning HTML summary with every review and your session average.</p>
+            </div>
+            <div class="feature-card scroll-reveal" style="--delay: 0.4s">
+                <div class="feature-icon">🔑</div>
+                <h3>Bring Your Own Key</h3>
+                <p>Plug in your own Google Gemini API key from Settings. Your key stays local and is
+                    sent securely — never stored on the server.</p>
+            </div>
+            <div class="feature-card scroll-reveal" style="--delay: 0.5s">
+                <div class="feature-icon">📋</div>
+                <h3>Review History</h3>
+                <p>Every review is saved to your session. Revisit past reviews, compare scores, and
+                    track your code quality improvement over time.</p>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="about-divider scroll-reveal">
+            <div class="divider-line"></div>
+            <span class="divider-label">HOW IT WORKS</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <!-- How It Works Timeline -->
+        <section class="about-how">
+            <div class="timeline">
+                <div class="timeline-step scroll-reveal" style="--delay: 0s">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Paste Your Code</h4>
+                        <p>Drop any Python, JavaScript, Java, C++, Go, Rust, or TypeScript into the editor.</p>
+                    </div>
+                </div>
+                <div class="timeline-step scroll-reveal" style="--delay: 0.15s">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>AI Analyzes It</h4>
+                        <p>Google Gemini 2.5 Flash reads your code like a senior engineer — understanding logic, flow,
+                            and intent.</p>
+                    </div>
+                </div>
+                <div class="timeline-step scroll-reveal" style="--delay: 0.3s">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Get Your Review</h4>
+                        <p>Quality Score out of 10, issues by severity, fix suggestions, and best practices.</p>
+                    </div>
+                </div>
+                <div class="timeline-step scroll-reveal" style="--delay: 0.45s">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Email Your Report</h4>
+                        <p>After one or more reviews, email yourself the full session breakdown + average score.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="about-divider scroll-reveal">
+            <div class="divider-line"></div>
+            <span class="divider-label">BUILT WITH</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <!-- Tech Stack -->
+        <section class="about-tech scroll-reveal">
+            <div class="tech-badges">
+                <span class="tech-badge">🧠 Google Gemini 2.5</span>
+                <span class="tech-badge">🔗 LangGraph</span>
+                <span class="tech-badge">⚡ FastAPI</span>
+                <span class="tech-badge">🐳 Docker</span>
+                <span class="tech-badge">🤗 HuggingFace</span>
+                <span class="tech-badge">🌐 GitHub Pages</span>
+                <span class="tech-badge">⚙️ GitHub Actions</span>
+                <span class="tech-badge">🐍 Python 3.11</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="about-footer scroll-reveal">
+            <div class="footer-logo">
+                <svg viewBox="0 0 32 32" fill="none" width="22" height="22">
+                    <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#logoGrad)" stroke-width="2.5" />
+                    <path d="M10 16L14 20L22 12" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>RedGlyph<span style="color: var(--accent-green);">.</span></span>
+            </div>
+            <p class="footer-tagline">Ship better code. Faster. Every time.</p>
+            <div class="footer-links">
+                <a href="https://github.com/mayank-goyal09" target="_blank" rel="noopener">GitHub</a>
+                <span class="footer-dot">·</span>
+                <a href="https://www.linkedin.com/in/mayank-goyal-4b8756363/" target="_blank"
+                    rel="noopener">LinkedIn</a>
+                <span class="footer-dot">·</span>
+                <a href="https://mayank-goyal09.github.io/" target="_blank" rel="noopener">Portfolio</a>
+                <span class="footer-dot">·</span>
+                <a href="https://huggingface.co/spaces/mayankg09/RedGlyph" target="_blank"
+                    rel="noopener">HuggingFace</a>
+                <span class="footer-dot">·</span>
+                <a href="https://mayankg09-redglyph.hf.space/docs" target="_blank" rel="noopener">API Docs</a>
+                <span class="footer-dot">·</span>
+                <a href="mailto:itsmaygal09@gmail.com">Contact</a>
+            </div>
+            <p class="footer-credit">Made with ❤️ by <strong>Mayank Goyal</strong></p>
+        </footer>
+
+    </div>
+
+    <!-- Scroll Reveal Observer -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -60px 0px'
+        });
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
