@@ -2,7 +2,7 @@
 title: RedGlyph AI Code Reviewer
 emoji: 🔍
 colorFrom: green
-colorTo: orange
+colorTo: yellow
 sdk: docker
 pinned: false
 ---
