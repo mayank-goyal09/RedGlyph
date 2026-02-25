@@ -85,6 +85,6 @@ jobs:
         run: |
           git config --global user.email "ci@redglyph"
           git config --global user.name "RedGlyph CI"
-          git remote add huggingface https://mayank-goyal09:${HF_TOKEN}@huggingface.co/spaces/mayank-goyal09/RedGlyph
+          git remote add huggingface https://mayankg09:${HF_TOKEN}@huggingface.co/spaces/mayankg09/RedGlyph
           git push huggingface main --force
           echo "✅ Deployed to HuggingFace Spaces"
