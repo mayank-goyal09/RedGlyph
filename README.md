@@ -274,16 +274,51 @@ RedGlyph/
 
 <div align="center">
 
-### 🔗 Links
+---
 
-[![Live App](https://img.shields.io/badge/🌐_Live_App-mayank--goyal09.github.io%2FRedGlyph-22c55e?style=for-the-badge)](https://mayank-goyal09.github.io/RedGlyph/)
-[![API](https://img.shields.io/badge/⚙️_API-mayankg09--redglyph.hf.space-f97316?style=for-the-badge)](https://mayankg09-redglyph.hf.space)
-[![GitHub](https://img.shields.io/badge/👨‍💻_GitHub-mayank--goyal09-181717?style=for-the-badge&logo=github)](https://github.com/mayank-goyal09)
+## 🌐 Domain Presence
 
 <br/>
 
-Made with ❤️ and ☕ by **Mayank Goyal**
+<table>
+<tr>
+<td align="center" width="25%">
+<a href="https://mayank-goyal09.github.io/RedGlyph/">
+<img src="https://img.shields.io/badge/-%F0%9F%9A%80%20LIVE%20APP-22c55e?style=for-the-badge&logoColor=white" /><br/>
+<b>Frontend</b><br/>
+<sub>mayank-goyal09.github.io/RedGlyph</sub>
+</a>
+</td>
+<td align="center" width="25%">
+<a href="https://huggingface.co/spaces/mayankg09/RedGlyph">
+<img src="https://img.shields.io/badge/-%F0%9F%A4%97%20HF%20SPACE-f97316?style=for-the-badge&logoColor=white" /><br/>
+<b>HuggingFace Space</b><br/>
+<sub>huggingface.co/spaces/mayankg09/RedGlyph</sub>
+</a>
+</td>
+<td align="center" width="25%">
+<a href="https://mayankg09-redglyph.hf.space/docs">
+<img src="https://img.shields.io/badge/-%F0%9F%93%9A%20API%20DOCS-3b82f6?style=for-the-badge&logoColor=white" /><br/>
+<b>Swagger UI</b><br/>
+<sub>mayankg09-redglyph.hf.space/docs</sub>
+</a>
+</td>
+<td align="center" width="25%">
+<a href="https://github.com/mayank-goyal09">
+<img src="https://img.shields.io/badge/-%F0%9F%91%A8%E2%80%8D%F0%9F%92%BB%20GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" /><br/>
+<b>GitHub Profile</b><br/>
+<sub>github.com/mayank-goyal09</sub>
+</a>
+</td>
+</tr>
+</table>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
+<br/>
+
+---
+
+Made with ❤️ and ☕ by **[Mayank Goyal](https://github.com/mayank-goyal09)**
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&text=RedGlyph+%C2%B7+Ship+Better+Code&fontSize=20&fontColor=86efac&animation=twinkling&fontAlignY=65" width="100%"/>
 
 </div>
